@@ -12,7 +12,7 @@ export interface Announcement  { id:string; code:string; title:string; body:stri
 
 export const MOCK_TEAM: TeamData = {
   teamName:"NEXUS", teamId:"VV-024", category:"Cyber Security", college:"VVCE, Mysuru",
-  memberCount:2, maxMembers:2,
+  memberCount:2, maxMembers:3,
   members:[
     {id:"m1",name:"Ananya Y K",  role:"Team Leader",branch:"CSE",isLeader:true, initials:"AY",accentColor:"var(--primary)"},
     {id:"m2",name:"Alex D Souza",role:"Member",      branch:"ISE",isLeader:false,initials:"AD",accentColor:"var(--cyan)"},
@@ -22,7 +22,7 @@ export const MOCK_TEAM: TeamData = {
 export const MOCK_MISSION: MissionData = {
   missionName:"SMART CITY SECURITY", category:"Cyber Security",
   description:"Design an AI-powered threat detection framework for smart-city infrastructure. Include real-time anomaly detection, zero-trust architecture, and privacy-preserving data sharing.",
-  status:"ACTIVE", roundNumber:1, deadline:"October 18, 2026 — 11:59 PM",
+  status:"ACTIVE", roundNumber:1, deadline:"November 2, 2026 — 11:59 PM",
 };
 
 export const MOCK_PROGRESS: ProgressData = {
@@ -37,7 +37,7 @@ export const MOCK_PROGRESS: ProgressData = {
 };
 
 export const MOCK_SUBMISSION: SubmissionData = {
-  status:"NOT_SUBMITTED", deadline:"October 18, 2026 — 11:59 PM",
+  status:"NOT_SUBMITTED", deadline:"November 2, 2026 — 11:59 PM",
 };
 
 export const MOCK_ANNOUNCEMENTS: Announcement[] = [

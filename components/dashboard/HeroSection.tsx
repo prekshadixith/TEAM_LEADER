@@ -49,7 +49,7 @@ export default function HeroSection() {
             {label:"TEAM ID",    value: MOCK_TEAM.teamId,       color:"var(--primary)"},
             {label:"CATEGORY",   value: MOCK_TEAM.category,     color:"var(--cyan)"},
             {label:"MISSION",    value: MOCK_MISSION.missionName,color:"var(--pink)"},
-            {label:"DEADLINE",   value: "OCT 18, 2026",         color:"var(--text-dim)"},
+            {label:"DEADLINE",   value: "NOV 2, 2026",         color:"var(--text-dim)"},
           ].map(item => (
             <div key={item.label}>
               <div style={{fontFamily:"var(--font-mono)",fontSize:"0.65rem",color:"var(--text-muted)",letterSpacing:"1px"}}>{item.label}</div>
