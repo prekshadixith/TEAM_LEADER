@@ -26,13 +26,21 @@ export default function ClientShell({ children }: { children: React.ReactNode })
     }
   }, [isHydrated, isAuthenticated, authUser, pathname, isProtectedRoute, router]);
 
+  if (!isHydrated) {
+    return (
+      <div style={{ minHeight: "100vh", background: "#060811", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div className="vv-spinner" />
+      </div>
+    );
+  }
+
   if (isPublicRoute) return <>{children}</>;
 
   if (isProtectedRoute && (!isAuthenticated || authUser?.role !== "TEAM_LEADER")) {
     return (
-      <div style={{ minHeight:"100vh", background:"#0B0B0B", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column", gap:"1.5rem" }}>
-        <div className="vv-spinner" style={{ borderTopColor:"var(--pink)" }} />
-        <p style={{ fontFamily:"var(--font-heading)", fontSize:"0.95rem", color:"var(--pink)", letterSpacing:"3px", textTransform:"uppercase" }}>
+      <div style={{ minHeight: "100vh", background: "#060811", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "1.5rem" }}>
+        <div className="vv-spinner" style={{ borderTopColor: "var(--pink)" }} />
+        <p style={{ fontFamily: "var(--font-heading)", fontSize: "0.95rem", color: "var(--pink)", letterSpacing: "3px", textTransform: "uppercase" }}>
           REDIRECTING TO LOGIN...
         </p>
       </div>

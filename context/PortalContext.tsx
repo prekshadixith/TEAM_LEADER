@@ -24,22 +24,20 @@ const PortalContext = createContext<PortalState | null>(null);
 const STORAGE_KEY = "vv_portal_auth";
 
 export function PortalProvider({ children }: { children: React.ReactNode }) {
-  // Synchronous client initialization from localStorage to prevent startup hydration lag
-  const [authUser, setAuthUser] = useState<AuthUser | null>(() => {
-    if (typeof window === "undefined") return null;
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      return stored ? (JSON.parse(stored) as AuthUser) : null;
-    } catch {
-      return null;
-    }
-  });
-
-  const [isHydrated, setIsHydrated] = useState<boolean>(true);
+  const [authUser, setAuthUser] = useState<AuthUser | null>(null);
+  const [isHydrated, setIsHydrated] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!isHydrated) setIsHydrated(true);
-  }, [isHydrated]);
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        setAuthUser(JSON.parse(stored) as AuthUser);
+      }
+    } catch {
+      // ignore JSON errors
+    }
+    setIsHydrated(true);
+  }, []);
 
   const login = useCallback((user: AuthUser) => {
     setAuthUser(user);
@@ -55,7 +53,7 @@ export function PortalProvider({ children }: { children: React.ReactNode }) {
     <PortalContext.Provider value={{
       isAuthenticated: !!authUser,
       authUser,
-      isHydrated: true,
+      isHydrated,
       login,
       logout,
       resetPortalState: logout,

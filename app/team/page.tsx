@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { getWorkflowState, type WorkflowState } from "@/lib/services/workflowService";
-import { CheckCircle2, AlertCircle, Shield, Users, Target } from "lucide-react";
+import { CheckCircle2, AlertCircle, Shield, Users, Target, UserCheck, ShieldCheck } from "lucide-react";
 
 export default function TeamPage() {
   const [state, setState] = useState<WorkflowState | null>(null);
@@ -22,97 +22,102 @@ export default function TeamPage() {
   const count = members.length;
   const isComplete = count === 3;
 
-  const statusText = isComplete
-    ? "3/3 Team Complete"
-    : `${count}/3 Members`;
+  const statusText = isComplete ? "3/3 OPERATIVES CONFIRMED" : `${count}/3 OPERATIVES`;
 
   return (
-    <main style={{ paddingBottom: "3rem", minHeight: "100vh", background: "var(--bg-deep)" }}>
-      <div style={{ maxWidth: "960px", margin: "0 auto" }}>
+    <main style={{ paddingBottom: "3rem", minHeight: "100vh" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+        
         {/* Header */}
-        <div style={{ marginBottom: "2rem" }}>
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.65rem", color: "var(--pink)", letterSpacing: "3px", marginBottom: "0.5rem" }}>
-            // SECTION 02: SQUAD ROSTER & DOMAIN
+        <div className="animate-slide-up" style={{ marginBottom: "2rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontFamily: "var(--font-mono)", fontSize: "0.68rem", color: "var(--cyan)", letterSpacing: "2.5px", marginBottom: "0.4rem" }}>
+            <Users size={14} /> // SECTION 02: SQUAD ROSTER & METADATA
           </div>
+          
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
-            <h1 className="text-glow-yellow" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(1.8rem,4vw,2.8rem)", lineHeight: 1.1 }}>
+            <h1 className="text-glow-cyan" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(1.8rem, 4vw, 2.75rem)", fontWeight: 800, lineHeight: 1.15 }}>
               SQUAD ROSTER & DOMAIN
             </h1>
 
-            {/* Clear Team Status Badge */}
+            {/* Team Status Badge */}
             <div
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "0.6rem",
-                padding: "0.6rem 1.25rem",
-                background: isComplete ? "rgba(0,255,136,0.1)" : "rgba(233,30,140,0.1)",
-                border: `1px solid ${isComplete ? "#00ff88" : "var(--pink)"}`,
+                gap: "0.65rem",
+                padding: "0.65rem 1.25rem",
+                background: isComplete ? "rgba(0,255,157,0.12)" : "rgba(255,0,122,0.12)",
+                border: `1px solid ${isComplete ? "var(--emerald)" : "var(--pink)"}`,
+                borderRadius: "8px",
               }}
             >
               {isComplete ? (
-                <CheckCircle2 size={18} style={{ color: "#00ff88" }} />
+                <CheckCircle2 size={18} style={{ color: "var(--emerald)" }} />
               ) : (
                 <AlertCircle size={18} style={{ color: "var(--pink)" }} />
               )}
-              <span style={{ fontFamily: "var(--font-heading)", fontSize: "0.95rem", color: isComplete ? "#00ff88" : "var(--pink)", letterSpacing: "1.5px" }}>
+              <span style={{ fontFamily: "var(--font-heading)", fontSize: "0.9rem", fontWeight: 700, color: isComplete ? "var(--emerald)" : "var(--pink)", letterSpacing: "1px" }}>
                 {statusText}
               </span>
             </div>
           </div>
         </div>
 
-        {/* Team & Domain Metadata Card */}
-        <div className="vv-card vv-corners" style={{ padding: "1.75rem", marginBottom: "2rem" }}>
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", color: "var(--primary)", letterSpacing: "2px", marginBottom: "1.25rem" }}>
-            // TEAM METADATA (VIEW ONLY)
+        {/* Team Metadata Card */}
+        <div className="vv-card vv-corners animate-slide-up" style={{ padding: "1.75rem", marginBottom: "2rem" }}>
+          <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.65rem", color: "var(--cyan)", letterSpacing: "2px", marginBottom: "1.25rem", fontWeight: 700 }}>
+            // TEAM IDENTIFICATION METADATA
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: "1.25rem" }}>
-            <div style={{ padding: "1rem", background: "rgba(0,0,0,0.4)", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.58rem", color: "var(--text-muted)", letterSpacing: "1px" }}>TEAM NAME</div>
-              <div style={{ fontFamily: "var(--font-heading)", fontSize: "1.1rem", color: "var(--primary)", marginTop: "0.2rem" }}>{state.teamName}</div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1.25rem" }}>
+            <div style={{ padding: "1rem", background: "rgba(6,10,22,0.6)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "8px" }}>
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", color: "var(--text-muted)", marginBottom: "0.25rem" }}>TEAM NAME</div>
+              <div style={{ fontFamily: "var(--font-heading)", fontSize: "1.1rem", fontWeight: 700, color: "var(--primary)" }}>{state.teamName}</div>
             </div>
 
-            <div style={{ padding: "1rem", background: "rgba(0,0,0,0.4)", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.58rem", color: "var(--text-muted)", letterSpacing: "1px" }}>TEAM UNIQUE ID</div>
-              <div style={{ fontFamily: "var(--font-mono)", fontSize: "1rem", color: "var(--cyan)", marginTop: "0.2rem", fontWeight: "bold" }}>{state.teamId}</div>
+            <div style={{ padding: "1rem", background: "rgba(6,10,22,0.6)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "8px" }}>
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", color: "var(--text-muted)", marginBottom: "0.25rem" }}>TEAM UNIQUE ID</div>
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: "1rem", fontWeight: 700, color: "var(--cyan)" }}>{state.teamId}</div>
             </div>
 
-            <div style={{ padding: "1rem", background: "rgba(0,0,0,0.4)", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.58rem", color: "var(--text-muted)", letterSpacing: "1px" }}>TEAM STRENGTH</div>
-              <div style={{ fontFamily: "var(--font-heading)", fontSize: "1.1rem", color: isComplete ? "#00ff88" : "var(--pink)", marginTop: "0.2rem" }}>{statusText}</div>
+            <div style={{ padding: "1rem", background: "rgba(6,10,22,0.6)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "8px" }}>
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", color: "var(--text-muted)", marginBottom: "0.25rem" }}>STRENGTH</div>
+              <div style={{ fontFamily: "var(--font-heading)", fontSize: "1rem", fontWeight: 700, color: isComplete ? "var(--emerald)" : "var(--pink)" }}>{statusText}</div>
             </div>
 
-            {/* PERSISTED SELECTED DOMAIN DISPLAY */}
-            <div style={{ padding: "1rem", background: "rgba(233,30,140,0.06)", border: "1px solid rgba(233,30,140,0.25)" }}>
-              <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.58rem", color: "var(--pink)", letterSpacing: "1px", display: "flex", alignItems: "center", gap: "0.3rem" }}>
-                <Target size={12} /> SELECTED DOMAIN
+            <div style={{ padding: "1rem", background: "rgba(255,0,122,0.08)", border: "1px solid rgba(255,0,122,0.25)", borderRadius: "8px" }}>
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", color: "var(--pink)", marginBottom: "0.25rem", display: "flex", alignItems: "center", gap: "0.35rem" }}>
+                <Target size={13} /> SELECTED DOMAIN
               </div>
-              <div style={{ fontFamily: "var(--font-heading)", fontSize: "1rem", color: "var(--pink)", marginTop: "0.2rem" }}>
+              <div style={{ fontFamily: "var(--font-heading)", fontSize: "1.05rem", fontWeight: 700, color: "var(--pink)" }}>
                 {state.selectedDomainName || "Cybersecurity & Defense"}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Squad Members Roster */}
-        <div className="vv-card vv-corners" style={{ padding: "1.75rem" }}>
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", color: "var(--cyan)", letterSpacing: "2px", marginBottom: "1.25rem" }}>
-            // SQUAD ROSTER (EXACTLY 3 MEMBERS REQUIRED)
+        {/* Squad Members List */}
+        <div className="vv-card vv-corners animate-slide-up" style={{ padding: "1.75rem" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.5rem" }}>
+            <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.65rem", color: "var(--cyan)", letterSpacing: "2px", fontWeight: 700 }}>
+              // REGISTERED SQUAD OPERATIVES
+            </div>
+            <UserCheck size={18} style={{ color: "var(--cyan)" }} />
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            {members.map((m, index) => (
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1.25rem" }}>
+            {members.map((m) => (
               <div
                 key={m.id}
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "1.25rem",
-                  padding: "1.1rem 1.25rem",
-                  background: m.isLeader ? "rgba(253,191,21,0.05)" : "rgba(255,255,255,0.025)",
-                  border: `1px solid ${m.isLeader ? "rgba(253,191,21,0.3)" : "rgba(255,255,255,0.08)"}`,
+                  gap: "1rem",
+                  padding: "1.2rem",
+                  background: m.isLeader ? "rgba(253, 191, 21, 0.06)" : "rgba(10, 15, 30, 0.6)",
+                  border: `1px solid ${m.isLeader ? "rgba(253, 191, 21, 0.35)" : "rgba(255, 255, 255, 0.08)"}`,
+                  borderRadius: "10px",
+                  backdropFilter: "blur(12px)",
                 }}
               >
                 <div
@@ -120,15 +125,16 @@ export default function TeamPage() {
                     width: "48px",
                     height: "48px",
                     borderRadius: "50%",
-                    border: `2px solid ${m.accentColor}`,
-                    background: "rgba(0,0,0,0.6)",
+                    border: `2px solid ${m.accentColor || "var(--cyan)"}`,
+                    background: "rgba(4,7,15,0.9)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     fontFamily: "var(--font-heading)",
-                    fontSize: "1rem",
-                    color: m.accentColor,
-                    boxShadow: `0 0 14px ${m.accentColor}44`,
+                    fontWeight: 700,
+                    fontSize: "0.95rem",
+                    color: m.accentColor || "var(--cyan)",
+                    boxShadow: `0 0 15px ${m.accentColor || "var(--cyan)"}44`,
                     flexShrink: 0,
                   }}
                 >
@@ -136,38 +142,34 @@ export default function TeamPage() {
                 </div>
 
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.2rem" }}>
-                    <span style={{ fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "1rem", color: "var(--text-main)" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                    <span style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "1rem", color: "#fff" }}>
                       {m.name}
                     </span>
                     {m.isLeader && (
-                      <span style={{ padding: "0.15rem 0.5rem", background: "var(--primary)", fontFamily: "var(--font-heading)", fontSize: "0.58rem", color: "#000", letterSpacing: "1px" }}>
-                        MEMBER 1 (LEADER)
-                      </span>
-                    )}
-                    {!m.isLeader && (
-                      <span style={{ padding: "0.15rem 0.5rem", background: "rgba(0,212,255,0.15)", border: "1px solid rgba(0,212,255,0.3)", fontFamily: "var(--font-mono)", fontSize: "0.58rem", color: "var(--cyan)", letterSpacing: "1px" }}>
-                        MEMBER {index + 1}
+                      <span className="vv-badge" style={{ background: "var(--primary)", color: "#000", fontWeight: 800, fontSize: "0.55rem" }}>
+                        LEADER
                       </span>
                     )}
                   </div>
-                  <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "var(--text-muted)" }}>
-                    {m.role} · {m.branch} {m.email ? `· ${m.email}` : ""}
+
+                  <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.72rem", color: "var(--text-dim)", marginTop: "0.2rem" }}>
+                    {m.role} &middot; {m.branch}
                   </div>
+
+                  {m.email && (
+                    <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.68rem", color: "var(--text-muted)", marginTop: "0.15rem" }}>
+                      {m.email}
+                    </div>
+                  )}
                 </div>
 
-                <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                  <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#00ff88", boxShadow: "0 0 8px #00ff88" }} />
-                  <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", color: "#00ff88" }}>VERIFIED</span>
-                </div>
+                <ShieldCheck size={20} style={{ color: "var(--emerald)", flexShrink: 0 }} />
               </div>
             ))}
           </div>
-
-          <p style={{ marginTop: "1.75rem", textAlign: "center", fontFamily: "var(--font-mono)", fontSize: "0.72rem", color: "var(--text-muted)", margin: 0 }}>
-            Squad roster is established and locked. Contact your SPOC to request roster modifications.
-          </p>
         </div>
+
       </div>
     </main>
   );

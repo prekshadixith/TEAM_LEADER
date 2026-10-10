@@ -13,6 +13,7 @@ import {
   Lock,
   MessageSquare,
   Radio,
+  Sparkles,
 } from "lucide-react";
 
 export default function SpocPage() {
@@ -21,14 +22,14 @@ export default function SpocPage() {
   const [pingSent, setPingSent] = useState(false);
   const [message, setMessage] = useState("");
   const [chatLog, setChatLog] = useState<string[]>([
-    "[10:14:02 UTC] SPOC Dr. Elena Rostova attached to Squad SHADOW-NINE.",
+    "[10:14:02 UTC] SPOC Dr. Elena Rostova assigned to your squad.",
     "[10:15:30 UTC] MENTOR: Initial briefing materials uploaded to secure cache.",
     "[11:00:12 UTC] MENTOR: Available for architecture reviews between 1400-1800 hrs.",
   ]);
 
   const SPOC_DETAILS = {
     name: "Dr. Elena Rostova",
-    designation: "Chief Technical Mentor & Systems Security Architect",
+    designation: "Chief Technical Mentor & Systems Architect",
     department: "Department of Computer Science & Engineering // IVC Club",
     email: "elena.rostova@vvce.ac.in",
     phone: "+91 98765 01928",
@@ -69,243 +70,126 @@ export default function SpocPage() {
   };
 
   return (
-    <main style={{ paddingBottom: "3rem" }}>
-      {/* Title Header */}
-      <div style={{ marginBottom: "2rem", borderBottom: "1px solid rgba(255,255,255,0.08)", paddingBottom: "1rem" }}>
-        <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.65rem", color: "var(--pink)", letterSpacing: "3px", marginBottom: "0.5rem" }}>
-          // SECTION 07: SINGLE POINT OF CONTACT (SPOC)
-        </div>
-        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}>
-          <div>
-            <h1 className="text-glow-yellow" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(1.8rem,4vw,2.5rem)", lineHeight: 1.1, marginBottom: "0.5rem" }}>
-              ASSIGNED SPOC & MENTOR DETAILS
-            </h1>
-            <p style={{ fontFamily: "var(--font-mono)", fontSize: "0.78rem", color: "var(--text-muted)", margin: 0 }}>
-              Official single point of contact details assigned by Event Administration.
-            </p>
+    <main style={{ paddingBottom: "3rem", minHeight: "100vh" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+        
+        {/* Title Header */}
+        <div className="animate-slide-up" style={{ marginBottom: "2rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontFamily: "var(--font-mono)", fontSize: "0.68rem", color: "var(--cyan)", letterSpacing: "2.5px", marginBottom: "0.4rem" }}>
+            <UserCheck size={14} /> // SECTION 07: SINGLE POINT OF CONTACT (SPOC)
           </div>
+          
+          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}>
+            <div>
+              <h1 className="text-glow-cyan" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(1.8rem, 4vw, 2.75rem)", fontWeight: 800, lineHeight: 1.15 }}>
+                ASSIGNED SPOC & MENTOR DETAILS
+              </h1>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "0.95rem", color: "var(--text-dim)", marginTop: "0.2rem" }}>
+                Official Single Point of Contact details assigned to your team by Event Administration.
+              </p>
+            </div>
 
-          <div style={{ padding: "0.5rem 1rem", background: "rgba(253,191,21,0.06)", border: "1px solid var(--border-yellow)", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <Lock size={14} style={{ color: "var(--primary)" }} />
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.65rem", color: "var(--primary)", letterSpacing: "1px" }}>
-              READ-ONLY // ASSIGNED BY ADMIN
+            <span className="vv-badge" style={{ background: "rgba(0, 240, 255, 0.12)", color: "var(--cyan)", border: "1px solid rgba(0, 240, 255, 0.3)" }}>
+              READ-ONLY &middot; ASSIGNED BY ADMIN
             </span>
           </div>
         </div>
-      </div>
 
-      {/* Main Grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "1.5rem" }}>
-        {/* Left Column: Read-Only SPOC Telemetry Card */}
-        <div className="vv-card vv-corners" style={{ padding: "1.75rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-          <div>
-            <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem", borderBottom: "1px solid rgba(255,255,255,0.08)", paddingBottom: "1.25rem", marginBottom: "1.5rem" }}>
-              <div style={{ width: "56px", height: "56px", borderRadius: "50%", border: "2px solid #00ff88", background: "rgba(0,255,136,0.1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                <UserCheck size={28} style={{ color: "#00ff88" }} />
-              </div>
-              <div>
-                <div style={{ fontFamily: "var(--font-heading)", fontSize: "1.2rem", color: "var(--text-main)", letterSpacing: "1px" }}>
-                  {SPOC_DETAILS.name}
+        {/* Main Grid */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: "1.75rem" }}>
+          
+          {/* SPOC Detail Card */}
+          <div className="vv-card vv-corners animate-slide-up" style={{ padding: "1.75rem", display: "flex", flexDirection: "column" }}>
+            <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.65rem", color: "var(--cyan)", letterSpacing: "2px", marginBottom: "1.25rem", fontWeight: 700 }}>
+              // ASSIGNED FACULTY MENTOR
+            </div>
+
+            <div style={{ display: "flex", alignItems: "center", gap: "1.25rem", marginBottom: "1.5rem" }}>
+              <div style={{ width: "64px", height: "64px", borderRadius: "50%", background: "linear-gradient(135deg, var(--cyan) 0%, var(--pink) 100%)", padding: "2px", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 20px rgba(0,240,255,0.3)" }}>
+                <div style={{ width: "100%", height: "100%", borderRadius: "50%", background: "#04060b", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--cyan)", fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "1.25rem" }}>
+                  ER
                 </div>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.72rem", color: "#00ff88", marginTop: "0.2rem" }}>
+              </div>
+
+              <div>
+                <h2 style={{ fontFamily: "var(--font-heading)", fontSize: "1.3rem", fontWeight: 800, color: "#fff" }}>
+                  {SPOC_DETAILS.name}
+                </h2>
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.72rem", color: "var(--cyan)" }}>
                   {SPOC_DETAILS.designation}
                 </div>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.65rem", color: "var(--text-muted)", marginTop: "0.35rem", display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                  <Building size={12} />
-                  <span>{SPOC_DETAILS.department}</span>
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.65rem", color: "var(--emerald)", marginTop: "0.2rem", display: "inline-flex", alignItems: "center", gap: "0.35rem" }}>
+                  <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--emerald)", boxShadow: "0 0 6px var(--emerald)" }} />
+                  {SPOC_DETAILS.status}
                 </div>
               </div>
             </div>
 
-            {/* Read-Only Details Cards */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "1rem", marginBottom: "1.5rem" }}>
-              {/* Email Card */}
-              <div style={{ padding: "1rem", background: "rgba(0,0,0,0.5)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.55rem", color: "var(--text-muted)", letterSpacing: "1px", marginBottom: "0.25rem" }}>
-                  1. OFFICIAL EMAIL ADDRESS
-                </div>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.82rem", color: "var(--cyan)", wordBreak: "break-all" }}>
-                  {SPOC_DETAILS.email}
-                </div>
-                <div style={{ marginTop: "0.75rem", display: "flex", gap: "0.5rem" }}>
-                  <a
-                    href={`mailto:${SPOC_DETAILS.email}`}
-                    style={{
-                      flex: 1,
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "0.4rem",
-                      padding: "0.45rem 0.75rem",
-                      background: "rgba(0,212,255,0.15)",
-                      border: "1px solid var(--cyan)",
-                      color: "var(--cyan)",
-                      fontFamily: "var(--font-heading)",
-                      fontSize: "0.72rem",
-                      letterSpacing: "1px",
-                      textDecoration: "none",
-                    }}
-                  >
-                    <Mail size={12} /> SEND EMAIL
-                  </a>
-                  <button
-                    onClick={handleCopyEmail}
-                    style={{
-                      padding: "0.45rem 0.75rem",
-                      background: "transparent",
-                      border: "1px solid rgba(255,255,255,0.15)",
-                      color: "var(--text-dim)",
-                      cursor: "pointer",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.65rem",
-                    }}
-                  >
-                    {copiedEmail ? <Check size={12} style={{ color: "#00ff88" }} /> : <Copy size={12} />}
-                  </button>
-                </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "1rem", flex: 1, marginBottom: "1.5rem" }}>
+              <div style={{ padding: "0.85rem", background: "rgba(6,10,22,0.6)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "8px" }}>
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", color: "var(--text-muted)", marginBottom: "0.2rem" }}>DEPARTMENT</div>
+                <div style={{ fontFamily: "var(--font-body)", fontSize: "0.88rem", color: "var(--text-main)" }}>{SPOC_DETAILS.department}</div>
               </div>
 
-              {/* Phone Card */}
-              <div style={{ padding: "1rem", background: "rgba(0,0,0,0.5)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.55rem", color: "var(--text-muted)", letterSpacing: "1px", marginBottom: "0.25rem" }}>
-                  2. CONTACT PHONE / HELPLINE
+              <div style={{ padding: "0.85rem", background: "rgba(6,10,22,0.6)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <div>
+                  <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", color: "var(--text-muted)", marginBottom: "0.2rem" }}>EMAIL ADDRESS</div>
+                  <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.85rem", color: "var(--cyan)" }}>{SPOC_DETAILS.email}</div>
                 </div>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.88rem", color: "#00ff88", fontWeight: "bold" }}>
-                  {SPOC_DETAILS.phone}
+                <button onClick={handleCopyEmail} style={{ background: "none", border: "none", color: "var(--cyan)", cursor: "pointer" }} title="Copy Email">
+                  {copiedEmail ? <Check size={16} style={{ color: "var(--emerald)" }} /> : <Copy size={16} />}
+                </button>
+              </div>
+
+              <div style={{ padding: "0.85rem", background: "rgba(6,10,22,0.6)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <div>
+                  <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", color: "var(--text-muted)", marginBottom: "0.2rem" }}>CONTACT PHONE</div>
+                  <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.85rem", color: "var(--primary)" }}>{SPOC_DETAILS.phone}</div>
                 </div>
-                <div style={{ marginTop: "0.75rem", display: "flex", gap: "0.5rem" }}>
-                  <a
-                    href={`tel:${SPOC_DETAILS.phone}`}
-                    style={{
-                      flex: 1,
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "0.4rem",
-                      padding: "0.45rem 0.75rem",
-                      background: "rgba(0,255,136,0.15)",
-                      border: "1px solid #00ff88",
-                      color: "#00ff88",
-                      fontFamily: "var(--font-heading)",
-                      fontSize: "0.72rem",
-                      letterSpacing: "1px",
-                      textDecoration: "none",
-                    }}
-                  >
-                    <Phone size={12} /> CALL MENTOR
-                  </a>
-                  <button
-                    onClick={handleCopyPhone}
-                    style={{
-                      padding: "0.45rem 0.75rem",
-                      background: "transparent",
-                      border: "1px solid rgba(255,255,255,0.15)",
-                      color: "var(--text-dim)",
-                      cursor: "pointer",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.65rem",
-                    }}
-                  >
-                    {copiedPhone ? <Check size={12} style={{ color: "#00ff88" }} /> : <Copy size={12} />}
-                  </button>
-                </div>
+                <button onClick={handleCopyPhone} style={{ background: "none", border: "none", color: "var(--primary)", cursor: "pointer" }} title="Copy Phone">
+                  {copiedPhone ? <Check size={16} style={{ color: "var(--emerald)" }} /> : <Copy size={16} />}
+                </button>
+              </div>
+
+              <div style={{ padding: "0.85rem", background: "rgba(6,10,22,0.6)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "8px" }}>
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", color: "var(--text-muted)", marginBottom: "0.2rem" }}>OFFICE LOCATION</div>
+                <div style={{ fontFamily: "var(--font-body)", fontSize: "0.88rem", color: "var(--text-main)" }}>{SPOC_DETAILS.officeLocation}</div>
               </div>
             </div>
+
+            <button onClick={handleSendPing} className="vv-button" disabled={pingSent}>
+              {pingSent ? "✓ BEACON TRANSMITTED" : "SEND PRIORITY BEACON TO SPOC ▶"}
+            </button>
           </div>
 
-          {/* Dispatch Ping Action */}
-          <button
-            onClick={handleSendPing}
-            disabled={pingSent}
-            style={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "0.5rem",
-              padding: "0.8rem",
-              background: pingSent ? "rgba(0,255,136,0.15)" : "rgba(253,191,21,0.15)",
-              border: `1px solid ${pingSent ? "#00ff88" : "var(--primary)"}`,
-              color: pingSent ? "#00ff88" : "var(--primary)",
-              fontFamily: "var(--font-heading)",
-              fontSize: "0.8rem",
-              letterSpacing: "1.5px",
-              cursor: pingSent ? "default" : "pointer",
-            }}
-          >
-            <Radio size={14} />
-            {pingSent ? "PRIORITY PING DISPATCHED ✓" : "DISPATCH TELEMETRY PING TO SPOC"}
-          </button>
-        </div>
-
-        {/* Right Column: Encrypted SPOC Uploader & Telemetry Channel */}
-        <div className="vv-card vv-corners" style={{ padding: "1.75rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-          <div>
-            <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", color: "var(--cyan)", letterSpacing: "2px", marginBottom: "1rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-              <MessageSquare size={14} /> ENCRYPTED SPOC CONSULTATION UPLINK
+          {/* Right Column: Communication Terminal */}
+          <div className="vv-card vv-corners animate-slide-up" style={{ padding: "1.75rem", display: "flex", flexDirection: "column" }}>
+            <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.65rem", color: "var(--pink)", letterSpacing: "2px", marginBottom: "1.25rem", fontWeight: 700 }}>
+              // SECURE MENTOR COMMS TERMINAL
             </div>
 
-            <p style={{ fontFamily: "var(--font-mono)", fontSize: "0.68rem", color: "var(--text-muted)", lineHeight: 1.6, marginBottom: "1rem" }}>
-              Direct line to SPOC for technical clarifications, domain inquiries, and schedule questions.
-            </p>
-
-            {/* Chat Log Window */}
-            <div style={{ height: "260px", overflowY: "auto", background: "rgba(0,0,0,0.6)", border: "1px solid rgba(255,255,255,0.08)", padding: "0.85rem", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-              {chatLog.map((log, i) => (
-                <div
-                  key={i}
-                  style={{
-                    padding: "0.6rem 0.75rem",
-                    background: log.includes("LEAD:") ? "rgba(0,212,255,0.06)" : log.includes("MENTOR:") ? "rgba(0,255,136,0.06)" : "rgba(255,255,255,0.02)",
-                    border: `1px solid ${log.includes("LEAD:") ? "rgba(0,212,255,0.2)" : log.includes("MENTOR:") ? "rgba(0,255,136,0.2)" : "rgba(255,255,255,0.05)"}`,
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "0.68rem",
-                    color: log.includes("LEAD:") ? "var(--cyan)" : log.includes("MENTOR:") ? "#00ff88" : "var(--text-muted)",
-                    lineHeight: 1.5,
-                  }}
-                >
+            <div style={{ flex: 1, minHeight: "260px", background: "rgba(4,7,15,0.9)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "10px", padding: "1rem", fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "var(--text-dim)", overflowY: "auto", display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "1.25rem" }}>
+              {chatLog.map((log, idx) => (
+                <div key={idx} style={{ color: log.includes("MENTOR:") ? "var(--cyan)" : log.includes("LEAD:") ? "var(--primary)" : "var(--text-muted)", lineHeight: 1.5 }}>
                   {log}
                 </div>
               ))}
             </div>
+
+            <form onSubmit={handleSendMessage} style={{ display: "flex", gap: "0.75rem" }}>
+              <input
+                type="text"
+                className="vv-input"
+                placeholder="Type dispatch message to mentor..."
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+              />
+              <button type="submit" className="vv-button" style={{ width: "auto", padding: "0 1.25rem" }}>
+                <Send size={16} />
+              </button>
+            </form>
           </div>
 
-          {/* Send Input Form */}
-          <form onSubmit={handleSendMessage} style={{ marginTop: "1rem", display: "flex", gap: "0.5rem" }}>
-            <input
-              type="text"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="Type inquiry for SPOC..."
-              style={{
-                flex: 1,
-                background: "rgba(0,0,0,0.6)",
-                border: "1px solid rgba(255,255,255,0.15)",
-                color: "var(--text-main)",
-                fontFamily: "var(--font-mono)",
-                fontSize: "0.75rem",
-                padding: "0.65rem 0.85rem",
-                outline: "none",
-              }}
-            />
-            <button
-              type="submit"
-              style={{
-                padding: "0.65rem 1rem",
-                background: "var(--cyan)",
-                border: "none",
-                color: "#000",
-                fontFamily: "var(--font-heading)",
-                fontSize: "0.8rem",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Send size={14} />
-            </button>
-          </form>
         </div>
       </div>
     </main>

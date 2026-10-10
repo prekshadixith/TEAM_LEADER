@@ -33,123 +33,105 @@ export default function ResultsPage() {
   const result = state.teamResult;
 
   return (
-    <main style={{ paddingBottom: "3rem", minHeight: "100vh", background: "var(--bg-deep)" }}>
-      <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+    <main style={{ paddingBottom: "3rem", minHeight: "100vh" }}>
+      <div style={{ maxWidth: "1050px", margin: "0 auto" }}>
+        
         {/* Page Header */}
-        <div style={{ marginBottom: "2rem" }}>
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.65rem", color: "var(--pink)", letterSpacing: "3px", marginBottom: "0.5rem" }}>
-            // SECTION 09: EVALUATION & RESULTS
+        <div className="animate-slide-up" style={{ marginBottom: "2rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontFamily: "var(--font-mono)", fontSize: "0.68rem", color: "var(--cyan)", letterSpacing: "2.5px", marginBottom: "0.4rem" }}>
+            <Trophy size={14} /> // SECTION 09: EVALUATION & RESULTS
           </div>
-          <h1 className="text-glow-yellow" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(1.8rem,4vw,2.8rem)", lineHeight: 1.1, marginBottom: "0.75rem" }}>
+          
+          <h1 className="text-glow-cyan" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(1.8rem, 4vw, 2.75rem)", fontWeight: 800, lineHeight: 1.15, marginBottom: "0.5rem" }}>
             OFFICIAL MISSION RESULTS
           </h1>
-          <p style={{ fontFamily: "var(--font-mono)", fontSize: "0.78rem", color: "var(--text-muted)", margin: 0 }}>
-            Official round scores, standings, and evaluator feedback for squad <span style={{ color: "var(--primary)" }}>{state.teamName}</span>.
+
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "0.95rem", color: "var(--text-dim)", margin: 0 }}>
+            Official round scores, standings, and evaluator feedback for squad <span style={{ color: "var(--primary)", fontWeight: 700 }}>{state.teamName}</span>.
           </p>
         </div>
 
         {!isPublished ? (
-          /* LOCKED / UNPUBLISHED STATE */
-          <div className="vv-card vv-corners" style={{ padding: "3.5rem 2rem", textAlign: "center", border: "1px solid rgba(253,191,21,0.2)" }}>
-            <div style={{ width: "64px", height: "64px", borderRadius: "50%", background: "rgba(253,191,21,0.08)", border: "1px solid var(--border-yellow)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.5rem" }}>
-              <Lock size={28} style={{ color: "var(--primary)" }} />
+          /* LOCKED STATE */
+          <div className="vv-card vv-corners animate-slide-up" style={{ padding: "3.5rem 2rem", textAlign: "center", border: "1px solid rgba(0, 240, 255, 0.25)", background: "linear-gradient(180deg, rgba(0,240,255,0.05) 0%, rgba(13,18,34,0.9) 100%)" }}>
+            <div style={{ width: "72px", height: "72px", borderRadius: "50%", background: "rgba(0, 240, 255, 0.12)", border: "1px solid var(--cyan)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.5rem", boxShadow: "0 0 25px rgba(0, 240, 255, 0.3)" }}>
+              <Lock size={32} style={{ color: "var(--cyan)" }} />
             </div>
 
-            <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", color: "var(--pink)", letterSpacing: "3px", marginBottom: "0.5rem" }}>
+            <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.65rem", color: "var(--pink)", letterSpacing: "3px", marginBottom: "0.5rem", fontWeight: 700 }}>
               // EVALUATION IN PROGRESS
             </div>
 
-            <div style={{ fontFamily: "var(--font-heading)", fontSize: "1.6rem", color: "var(--primary)", letterSpacing: "1.5px", marginBottom: "1rem" }}>
+            <h2 style={{ fontFamily: "var(--font-heading)", fontSize: "1.8rem", fontWeight: 800, color: "#fff", letterSpacing: "1px", marginBottom: "1rem" }}>
               RESULTS CLASSIFIED & LOCKED
-            </div>
+            </h2>
 
-            <p style={{ fontFamily: "var(--font-mono)", fontSize: "0.8rem", color: "var(--text-dim)", maxWidth: "520px", margin: "0 auto 2rem", lineHeight: 1.7 }}>
-              Evaluation scores for <strong style={{ color: "var(--primary)" }}>{state.teamName}</strong> are currently under review by the judging panel. Official results will be published here once authorized by the Event Admin.
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "0.95rem", color: "var(--text-dim)", maxWidth: "540px", margin: "0 auto 2rem", lineHeight: 1.7 }}>
+              Evaluation scores for squad <strong style={{ color: "var(--cyan)" }}>{state.teamName}</strong> are currently under review by the judging panel. Results will be unlocked automatically once authorized by Event Administration.
             </p>
 
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "0.6rem", padding: "0.6rem 1.25rem", background: "rgba(0,0,0,0.5)", border: "1px solid rgba(255,255,255,0.08)", fontFamily: "var(--font-mono)", fontSize: "0.68rem", color: "var(--text-muted)" }}>
-              <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: "var(--pink)", boxShadow: "0 0 8px var(--pink)", animation: "status-pulse 2s ease-in-out infinite" }} />
+            <span className="vv-badge" style={{ background: "rgba(255,0,122,0.12)", color: "var(--pink)", border: "1px solid var(--pink)", padding: "0.5rem 1.25rem" }}>
               STATUS: AWAITING ADMIN PUBLICATION
-            </div>
+            </span>
           </div>
         ) : (
-          /* PUBLISHED OWN RESULTS ONLY */
-          <div className="space-y-6">
+          /* PUBLISHED RESULTS STATE */
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }} className="animate-slide-up">
+            
             {/* Header Banner */}
-            <div className="vv-card vv-corners" style={{ padding: "1.75rem", background: "rgba(0,255,136,0.04)", border: "1px solid rgba(0,255,136,0.3)" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.5rem" }}>
-                <CheckCircle size={20} style={{ color: "#00ff88" }} />
-                <span style={{ fontFamily: "var(--font-heading)", fontSize: "1.1rem", color: "#00ff88", letterSpacing: "1.5px" }}>
-                  RESULTS PUBLISHED — OWN SQUAD PERFORMANCE
+            <div className="vv-card vv-corners" style={{ padding: "1.5rem 1.75rem", background: "linear-gradient(180deg, rgba(0,255,157,0.08) 0%, rgba(13,18,34,0.9) 100%)", border: "1px solid var(--emerald)" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.35rem" }}>
+                <CheckCircle size={22} style={{ color: "var(--emerald)" }} />
+                <span style={{ fontFamily: "var(--font-heading)", fontSize: "1.15rem", fontWeight: 800, color: "var(--emerald)", letterSpacing: "1px" }}>
+                  RESULTS PUBLISHED — SQUAD PERFORMANCE REPORT
                 </span>
               </div>
-              <p style={{ fontFamily: "var(--font-mono)", fontSize: "0.72rem", color: "var(--text-dim)", margin: 0 }}>
-                Showing confidential evaluation data for squad <strong style={{ color: "var(--primary)" }}>{state.teamName} ({state.teamId})</strong>.
+              <p style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "var(--text-dim)", margin: 0 }}>
+                Showing verified evaluation score for squad <strong style={{ color: "var(--primary)" }}>{state.teamName} ({state.teamId})</strong>.
               </p>
             </div>
 
-            {/* Score & Rank Highlight Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Score & Rank Display */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1.5rem" }}>
+              
               {/* Score Card */}
-              <div className="vv-card vv-corners" style={{ padding: "2rem", textAlign: "center", background: "rgba(253,191,21,0.04)", border: "1px solid var(--border-yellow)" }}>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", color: "var(--primary)", letterSpacing: "2px", marginBottom: "0.5rem" }}>
+              <div className="vv-card vv-corners" style={{ padding: "2rem", textAlign: "center", background: "rgba(253,191,21,0.05)", border: "1px solid rgba(253,191,21,0.3)" }}>
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.65rem", color: "var(--primary)", letterSpacing: "2px", marginBottom: "0.5rem", fontWeight: 700 }}>
                   // TOTAL EVALUATION SCORE
                 </div>
-                <div style={{ fontFamily: "var(--font-heading)", fontSize: "3.5rem", color: "var(--primary)", lineHeight: 1 }} className="text-glow-yellow">
-                  {result?.score ?? 94.5} <span style={{ fontSize: "1.5rem", color: "var(--text-muted)" }}>/ 100</span>
+                <div className="text-glow-yellow" style={{ fontFamily: "var(--font-heading)", fontSize: "3.75rem", fontWeight: 900, color: "var(--primary)", lineHeight: 1 }}>
+                  {result?.score ?? 94.5} <span style={{ fontSize: "1.5rem", color: "var(--text-muted)", fontWeight: 400 }}>/ 100</span>
                 </div>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.7rem", color: "var(--cyan)", marginTop: "0.75rem" }}>
-                  SCORE VERIFIED BY JUDGING PANEL
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.72rem", color: "var(--text-dim)", marginTop: "0.85rem" }}>
+                  OVERALL RATING: OUTSTANDING
                 </div>
               </div>
 
-              {/* Standing Rank Card */}
-              <div className="vv-card vv-corners" style={{ padding: "2rem", textAlign: "center", background: "rgba(0,212,255,0.04)", border: "1px solid rgba(0,212,255,0.3)" }}>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", color: "var(--cyan)", letterSpacing: "2px", marginBottom: "0.5rem" }}>
-                  // EVENT STANDING & RANK
+              {/* Rank Card */}
+              <div className="vv-card vv-corners" style={{ padding: "2rem", textAlign: "center", background: "rgba(0,240,255,0.05)", border: "1px solid rgba(0,240,255,0.3)" }}>
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.65rem", color: "var(--cyan)", letterSpacing: "2px", marginBottom: "0.5rem", fontWeight: 700 }}>
+                  // OFFICIAL LEADERBOARD RANK
                 </div>
-                <div style={{ fontFamily: "var(--font-heading)", fontSize: "3.5rem", color: "var(--cyan)", lineHeight: 1 }}>
-                  #{result?.rank ?? 2} <span style={{ fontSize: "1.2rem", color: "var(--text-muted)" }}>OF {result?.totalTeams ?? 48} TEAMS</span>
+                <div className="text-glow-cyan" style={{ fontFamily: "var(--font-heading)", fontSize: "3.75rem", fontWeight: 900, color: "var(--cyan)", lineHeight: 1 }}>
+                  #{result?.rank ?? 2} <span style={{ fontSize: "1.5rem", color: "var(--text-muted)", fontWeight: 400 }}>OF 45</span>
                 </div>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.7rem", color: "#00ff88", marginTop: "0.75rem" }}>
-                  TOP TIER FINALIST QUALIFIED
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.72rem", color: "var(--emerald)", marginTop: "0.85rem" }}>
+                  PODIUM FINISH &middot; QUALIFIED FOR FINALS
                 </div>
               </div>
+
             </div>
 
-            {/* Detailed Criteria Breakdown */}
+            {/* Evaluator Feedback Card */}
             <div className="vv-card vv-corners" style={{ padding: "1.75rem" }}>
-              <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", color: "var(--pink)", letterSpacing: "2px", marginBottom: "1.5rem" }}>
-                // CRITERIA SCORE BREAKDOWN
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.65rem", color: "var(--pink)", letterSpacing: "2px", marginBottom: "1.25rem", fontWeight: 700 }}>
+                // JUDGES EVALUATION FEEDBACK
               </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                <div style={{ padding: "1.25rem", background: "rgba(0,0,0,0.5)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                  <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.58rem", color: "var(--text-muted)", marginBottom: "0.35rem" }}>INNOVATION & NOVELTY</div>
-                  <div style={{ fontFamily: "var(--font-heading)", fontSize: "1.6rem", color: "var(--primary)" }}>{result?.innovationScore ?? 28} / 30</div>
-                </div>
-
-                <div style={{ padding: "1.25rem", background: "rgba(0,0,0,0.5)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                  <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.58rem", color: "var(--text-muted)", marginBottom: "0.35rem" }}>TECHNICAL EXECUTION</div>
-                  <div style={{ fontFamily: "var(--font-heading)", fontSize: "1.6rem", color: "var(--cyan)" }}>{result?.techScore ?? 34} / 35</div>
-                </div>
-
-                <div style={{ padding: "1.25rem", background: "rgba(0,0,0,0.5)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                  <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.58rem", color: "var(--text-muted)", marginBottom: "0.35rem" }}>PRESENTATION & PITCH</div>
-                  <div style={{ fontFamily: "var(--font-heading)", fontSize: "1.6rem", color: "var(--pink)" }}>{result?.presentationScore ?? 32.5} / 35</div>
-                </div>
-              </div>
-
-              {/* Evaluator Remarks */}
-              <div style={{ padding: "1.25rem", background: "rgba(253,191,21,0.03)", border: "1px solid rgba(253,191,21,0.18)" }}>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.6rem", color: "var(--primary)", letterSpacing: "1.5px", marginBottom: "0.5rem" }}>
-                  EVALUATOR / JUDGE REMARKS
-                </div>
-                <p style={{ fontFamily: "var(--font-body)", fontSize: "0.88rem", color: "var(--text-dim)", lineHeight: 1.7, margin: 0 }}>
-                  "{result?.feedback || "Exceptional architecture with robust real-time security telemetry. Great presentation clarity."}"
-                </p>
-              </div>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "0.95rem", color: "var(--text-main)", lineHeight: 1.7, background: "rgba(6,10,22,0.6)", padding: "1.25rem", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "8px" }}>
+                {result?.feedback ?? "Exceptional solution architecture. The technical depth, system security model, and interactive dashboard execution demonstrated top-tier engineering discipline."}
+              </p>
             </div>
+
           </div>
         )}
       </div>
